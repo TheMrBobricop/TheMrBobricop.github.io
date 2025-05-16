@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запись | TATTOO CLUB</title>
+    <style>
+        /* Все предыдущие стили остаются */
+        
+        /* Специфичные стили для страницы записи */
+        .booking-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--main-black);
+            z-index: 9999;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .booking-page.active {
+            display: flex;
+            opacity: 1;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .gold-divider {
+            width: 200px;
+            height: 2px;
+            background: var(--accent-gold);
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gold-divider::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--hover-gold), transparent);
+            animation: dividerFlow 3s infinite;
+        }
+
+        .phone-number {
+            font-size: 3em;
+            letter-spacing: 3px;
+            position: relative;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .phone-number:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 15px var(--accent-gold);
+        }
+
+        .booking-steps {
+            display: grid;
+            gap: 40px;
+            margin: 50px 0;
+        }
+
+        .step-card {
+            background: var(--section-bg);
+            padding: 30px;
+            border-radius: 15px;
+            position: relative;
+            border: 1px solid rgba(255,215,0,0.1);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 40px;
+            height: 40px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--main-black);
+        }
+
+        @keyframes dividerFlow {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Страница записи -->
+    <div class="booking-page" id="bookingPage">
+        <div class="logo-container" style="margin-bottom: 50px;">
+            <img src="https://i.ibb.co/3YXk2q0/tattoo1.jpg" 
+                 alt="Booking Logo" 
+                 class="main-logo"
+                 style="width: 200px;">
+        </div>
+
+        <h2 style="font-size: 2.5em; text-align: center;">
+            Готовы создать свою историю?
+        </h2>
+
+        <div class="gold-divider"></div>
+
+        <div class="phone-number" onclick="navigator.clipboard.writeText('+7XXX XXX-XX-XX')">
+            +7XXX XXX-XX-XX
+        </div>
+
+        <div class="booking-steps">
+            <!-- Шаги записи -->
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Обсуждение идеи</h3>
+                <p>Опишите вашу задумку в мессенджере</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Выбор даты</h3>
+                <p>Согласуем удобное время сеанса</p>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Подготовка</h3>
+                <p>Получите персональные рекомендации</p>
+            </div>
+        </div>
+
+        <button class="close-btn" 
+                onclick="document.getElementById('bookingPage').classList.remove('active')"
+                style="position: fixed; 
+                       top: 30px; 
+                       right: 30px; 
+                       background: none; 
+                       border: 2px solid var(--accent-gold); 
+                       color: white; 
+                       padding: 10px 20px; 
+                       cursor: pointer;
+                       transition: 0.3s;">
+            Закрыть
+        </button>
+    </div>
+
+    <script>
+        // Активация страницы записи
+        document.querySelector('button').addEventListener('click', function() {
+            document.getElementById('bookingPage').classList.add('active');
+        });
+
+        // Анимация при наведении на кнопку закрытия
+        document.querySelector('.close-btn').addEventListener('mouseover', function() {
+            this.style.transform = 'rotate(90deg)';
+            this.style.backgroundColor = 'var(--accent-gold)';
+            this.style.color = 'var(--main-black)';
+        });
+        
+        document.querySelector('.close-btn').addEventListener('mouseout', function() {
+            this.style.transform = 'rotate(0deg)';
+            this.style.backgroundColor = 'transparent';
+            this.style.color = 'white';
+        });
+    </script>
+</body>
+</html>
